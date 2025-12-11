@@ -1,12 +1,9 @@
-import chickenImg from "../assets/images/chicken.jpg";
-import bowlImg from "../assets/images/bowl.png";
-import cakeImg from "../assets/images/cake.jpg";
-
 const recipes = [
   {
     id: 1,
     title: "Roasted Chicken",
-    image: chickenImg,
+    category: "Dinner",
+    image: require("../assets/images/chicken.jpg"),
     description: "A delicious roasted chicken with herbs.",
     ingredients: ["Chicken", "Garlic", "Lemon", "Rosemary"],
     steps: ["Preheat oven to 200°C", "Season chicken", "Roast for 60 minutes"],
@@ -14,7 +11,8 @@ const recipes = [
   {
     id: 2,
     title: "Vegan Bowl",
-    image: bowlImg,
+    category: "Lunch",
+    image: require("../assets/images/bowl.png"),
     description: "Healthy vegan bowl with vegetables.",
     ingredients: ["Quinoa", "Avocado", "Corn", "Beans"],
     steps: ["Boil quinoa", "Chop vegetables", "Mix and serve"],
@@ -22,7 +20,8 @@ const recipes = [
   {
     id: 3,
     title: "Chocolate Cake",
-    image: cakeImg,
+    category: "Dessert",
+    image: require("../assets/images/cake.jpg"),
     description: "Soft and moist chocolate cake.",
     ingredients: ["Cocoa", "Flour", "Sugar"],
     steps: ["Mix ingredients", "Bake for 30 mins at 180°C"],

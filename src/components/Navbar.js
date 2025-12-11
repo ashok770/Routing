@@ -1,17 +1,20 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./Navbar.css";
+
+import logo from "../assets/logo.png"; // <-- NEW
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        {/* LOGO */}
-        <Link to="/" className="logo">
-          CookMate
-        </Link>
+        {/* LOGO + TEXT */}
+        <div className="brand">
+          <img src={logo} alt="CookMate Logo" className="brand-logo" />
+          <span className="brand-name">CookMate</span>
+        </div>
 
-        {/* MENU LINKS */}
+        {/* NAV LINKS */}
         <div className="nav-links">
           <NavLink to="/" end>
             Home
