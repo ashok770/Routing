@@ -1,14 +1,21 @@
-/* Navbar Style */
+/* RESET SPACING */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* NAVBAR */
 .navbar {
   width: 100%;
   background-color: #074d35;
   padding: 12px 0;
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 999;
+  margin: 0;
 }
 
-/* Center the navbar content */
+/* Navbar container */
 .nav-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -18,51 +25,33 @@
   padding: 0 20px;
 }
 
-/* Logo text */
+/* Logo */
 .logo {
   font-size: 24px;
   font-weight: bold;
   color: white;
   text-decoration: none;
-  letter-spacing: 1px;
 }
 
-/* Navigation menu */
+/* Nav links */
 .nav-links {
   display: flex;
   gap: 25px;
+  align-items: center;
 }
 
-/* Menu links style */
+/* Link styling */
 .nav-links a {
-  text-decoration: none;
   color: white;
+  text-decoration: none;
   font-size: 16px;
   padding-bottom: 4px;
   transition: 0.3s;
 }
 
-/* Hover effect */
-.nav-links a:hover {
-  color: #f9a825; /* gold highlight */
-  border-bottom: 2px solid #f9a825;
-}
-
-/* Active route highlight */
+/* Hover and active */
+.nav-links a:hover,
 .nav-links .active {
   color: #f9a825;
   border-bottom: 2px solid #f9a825;
-}
-/* Remove default margin/padding gap below navbar */
-.navbar {
-  margin-bottom: 0;
-}
-.navbar {
-  margin: 0;
-  padding: 15px 30px;
-}
-
-.navbar nav ul {
-  margin: 0;
-  padding: 0;
 }

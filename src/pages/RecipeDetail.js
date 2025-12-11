@@ -1,34 +1,43 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import recipes from "../data/recipesData";
+import "./RecipeDetail.css";
 
 const RecipeDetail = () => {
   const { id } = useParams();
-  const recipe = recipes.find((item) => item.id === parseInt(id));
+  const recipe = recipes.find((r) => r.id === parseInt(id));
 
   if (!recipe) {
-    return <h2>Recipe Not Found ❌</h2>;
+    return <h2>Recipe Not Found</h2>;
   }
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1>{recipe.title}</h1>
-      <img src={recipe.image} alt={recipe.title} width="350" />
-      <p>{recipe.description}</p>
+    <div className="recipe-detail-container">
+      <h1 className="recipe-title">{recipe.title}</h1>
 
-      <h3>Ingredients</h3>
-      <ul>
-        {recipe.ingredients.map((ing, i) => (
-          <li key={i}>{ing}</li>
+      <img src={recipe.image} alt={recipe.title} className="recipe-image" />
+
+      <p className="recipe-description">{recipe.description}</p>
+
+      {/* Ingredients */}
+      <h2 className="section-title">Ingredients</h2>
+      <ul className="ingredients-list">
+        {recipe.ingredients.map((item, index) => (
+          <li key={index}>{item}</li>
         ))}
       </ul>
 
-      <h3>Steps</h3>
-      <ol>
-        {recipe.steps.map((step, i) => (
-          <li key={i}>{step}</li>
+      {/* Steps */}
+      <h2 className="section-title">Steps</h2>
+      <ol className="steps-list">
+        {recipe.steps.map((step, index) => (
+          <li key={index}>{step}</li>
         ))}
       </ol>
+
+      <Link to="/recipes">
+        <button className="back-btn">⬅ Back to Recipes</button>
+      </Link>
     </div>
   );
 };
