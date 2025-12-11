@@ -1,33 +1,30 @@
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
 import "./Navbar.css";
 
-function Navbar() {
+const Navbar = () => {
   return (
     <nav className="navbar">
-      <div className="logo">CookMate</div>
+      <div className="nav-container">
+        {/* LOGO */}
+        <Link to="/" className="logo">
+          CookMate
+        </Link>
 
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/recipes">Recipes</Link>
-        </li>
-        <li>
-          <Link to="/guides">Cooking Guides</Link>
-        </li>
-        <li>
-          <Link to="/blog">Blog</Link>
-        </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-        <li>
-          <Link to="/profile">My Profile</Link>
-        </li>
-      </ul>
+        {/* MENU LINKS */}
+        <div className="nav-links">
+          <NavLink to="/" end>
+            Home
+          </NavLink>
+          <NavLink to="/recipes">Recipes</NavLink>
+          <NavLink to="/guides">Cooking Guides</NavLink>
+          <NavLink to="/blog">Blog</NavLink>
+          <NavLink to="/login">Login</NavLink>
+          <NavLink to="/profile">My Profile</NavLink>
+        </div>
+      </div>
     </nav>
   );
-}
+};
 
 export default Navbar;

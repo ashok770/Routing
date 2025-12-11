@@ -1,23 +1,59 @@
+/* Navbar Style */
 .navbar {
-  background-color: #064d36;
-  padding: 12px 20px;
+  width: 100%;
+  background-color: #074d35;
+  padding: 12px 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+/* Center the navbar content */
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
 }
 
-.navbar ul {
-  display: flex;
-  gap: 20px;
-  list-style: none;
-}
-
-.navbar a {
+/* Logo text */
+.logo {
+  font-size: 24px;
+  font-weight: bold;
   color: white;
   text-decoration: none;
-  font-weight: 500;
+  letter-spacing: 1px;
 }
 
-.navbar a:hover {
-  color: yellow;
+/* Navigation menu */
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+/* Menu links style */
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  padding-bottom: 4px;
+  transition: 0.3s;
+}
+
+/* Hover effect */
+.nav-links a:hover {
+  color: #f9a825; /* gold highlight */
+  border-bottom: 2px solid #f9a825;
+}
+
+/* Active route highlight */
+.nav-links .active {
+  color: #f9a825;
+  border-bottom: 2px solid #f9a825;
+}
+/* Remove default margin/padding gap below navbar */
+.navbar {
+  margin-bottom: 0;
 }
