@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import Recipes from "../pages/Recipes/Recipes";
 import RecipeDetail from "../pages/RecipeDetail";
 import CookingGuides from "../pages/CookingGuides";
+import GuideDetail from "../pages/GuideDetail";
 
 import Blog from "../pages/Blog";
 import Login from "../pages/Login";
@@ -20,6 +21,7 @@ const AppRoutes = () => {
       <Route path="/recipe/:id" element={<RecipeDetail />} />
 
       <Route path="/guides" element={<CookingGuides />} />
+      <Route path="/guide/:id" element={<GuideDetail />} />
 
       <Route path="/blog" element={<Blog />} />
       <Route path="/login" element={<Login />} />
