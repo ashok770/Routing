@@ -45,3 +45,23 @@
 .back-btn:hover {
   text-decoration: underline;
 }
+.breadcrumb {
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+.breadcrumb a {
+  text-decoration: none;
+  color: #074d35;
+  font-weight: 500;
+}
+
+.breadcrumb span {
+  margin: 0 6px;
+}
+
+.breadcrumb .current {
+  color: #999;
+  font-weight: 400;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import blogData from "../data/blogData";
 import "./BlogDetail.css";
 
@@ -15,6 +15,15 @@ const BlogDetail = () => {
 
   return (
     <div className="blog-detail">
+      {/* Breadcrumb */}
+      <div className="breadcrumb">
+        <Link to="/">Home</Link>
+        <span>/</span>
+        <Link to="/blog">Blog</Link>
+        <span>/</span>
+        <span className="current">{blog.title}</span>
+      </div>
+
       {/* Back Button */}
       <button className="back-btn" onClick={() => navigate(-1)}>
         ⬅ Back to Blogs
