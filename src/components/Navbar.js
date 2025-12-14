@@ -2,17 +2,17 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 
-import logo from "../assets/logo.png"; // <-- NEW
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="nav-container">
-        {/* LOGO + TEXT */}
-        <div className="brand">
+        {/* LOGO + TEXT (CLICKABLE) */}
+        <NavLink to="/" className="brand">
           <img src={logo} alt="CookMate Logo" className="brand-logo" />
           <span className="brand-name">CookMate</span>
-        </div>
+        </NavLink>
 
         {/* NAV LINKS */}
         <div className="nav-links">

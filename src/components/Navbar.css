@@ -65,3 +65,11 @@
   color: #f9a825;
   border-bottom: 2px solid #f9a825;
 }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
