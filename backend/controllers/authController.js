@@ -1,13 +1,12 @@
 const User = require("../models/User");
 
-// @desc Register user
-// @route POST /api/auth/register
-exports.registerUser = async (req, res) => {
+// REGISTER (already working)
+exports.register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    const userExists = await User.findOne({ email });
-    if (userExists) {
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
     }
 
@@ -19,12 +18,32 @@ exports.registerUser = async (req, res) => {
 
     res.status(201).json({
       message: "User registered successfully",
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
+      user,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// ✅ LOGIN (THIS WAS MISSING / WRONG)
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // check user
+    const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // check password (plain for now)
+    if (user.password !== password) {
+      return res.status(401).json({ message: "Invalid credentials" });
+    }
+
+    res.status(200).json({
+      message: "Login successful",
+      user,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
