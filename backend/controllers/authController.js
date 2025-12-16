@@ -1,4 +1,6 @@
 const User = require("../models/User");
+const bcrypt = require("bcryptjs"); // ✅ MISSING IMPORT
+const jwt = require("jsonwebtoken");
 
 /* ======================
    REGISTER
@@ -19,7 +21,7 @@ exports.register = async (req, res) => {
     const user = await User.create({
       name,
       email,
-      password, // bcrypt happens automatically (pre-save)
+      password, // hashed by pre-save hook
     });
 
     res.status(201).json({
@@ -39,7 +41,7 @@ exports.register = async (req, res) => {
 /* ======================
    LOGIN
 ====================== */
-exports.login = async (req, res) => {
+exports.loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -48,13 +50,20 @@ exports.login = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const isMatch = await user.matchPassword(password);
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
+    const token = jwt.sign(
+      { id: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRES }
+    );
+
     res.status(200).json({
       message: "Login successful",
+      token, // ✅ NOW YOU WILL SEE THIS
       user: {
         id: user._id,
         name: user.name,
