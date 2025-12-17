@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
 import { registerUser } from "../api/authApi";
-import "./Register.css";
+import { useNavigate, Link } from "react-router-dom";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -13,8 +12,7 @@ export default function Register() {
     confirmPassword: "",
   });
 
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const { name, email, password, confirmPassword } = formData;
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -22,27 +20,18 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
 
-    if (formData.password !== formData.confirmPassword) {
-      return setError("Passwords do not match");
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
     }
 
     try {
-      setLoading(true);
-
-      await registerUser({
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-      });
-
-      alert("Registration successful! Please login.");
+      await registerUser({ name, email, password });
+      alert("Registration successful");
       navigate("/login");
-    } catch (err) {
-      setError(err.response?.data?.message || "Registration failed");
-    } finally {
-      setLoading(false);
+    } catch (error) {
+      alert(error.response?.data?.message || "Registration failed");
     }
   };
 
@@ -51,44 +40,44 @@ export default function Register() {
       <div className="register-card">
         <h2>Create Account</h2>
 
-        {error && <p className="error-text">{error}</p>}
-
         <form onSubmit={handleSubmit}>
           <input
             type="text"
             name="name"
             placeholder="Full Name"
-            required
+            value={name}
             onChange={handleChange}
+            required
           />
 
           <input
             type="email"
             name="email"
             placeholder="Email"
-            required
+            value={email}
             onChange={handleChange}
+            required
           />
 
           <input
             type="password"
             name="password"
             placeholder="Password"
-            required
+            value={password}
             onChange={handleChange}
+            required
           />
 
           <input
             type="password"
             name="confirmPassword"
             placeholder="Confirm Password"
-            required
+            value={confirmPassword}
             onChange={handleChange}
+            required
           />
 
-          <button type="submit" disabled={loading}>
-            {loading ? "Registering..." : "Register"}
-          </button>
+          <button type="submit">Register</button>
         </form>
 
         <p>

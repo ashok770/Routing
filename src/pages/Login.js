@@ -1,16 +1,47 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { loginUser } from "../api/authApi";
+import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const [role, setRole] = useState("user");
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = formData;
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await loginUser({ email, password });
+
+      // ✅ Save token
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
+
+      alert("Login successful");
+
+      // Redirect
+      navigate("/profile");
+    } catch (error) {
+      alert(error.response?.data?.message || "Login failed");
+    }
+  };
 
   return (
     <div className="login-page">
       <div className="login-card">
         <h2 className="login-title">🔐 Login to CookMate</h2>
 
-        {/* Role Toggle */}
         <div className="role-toggle">
           <button
             className={role === "user" ? "active" : ""}
@@ -26,24 +57,30 @@ export default function Login() {
           </button>
         </div>
 
-        {/* Login Form */}
-        <form className="login-form">
-          <input type="email" placeholder="Email address" required />
-          <input type="password" placeholder="Password" required />
+        <form className="login-form" onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email address"
+            value={email}
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            value={password}
+            onChange={handleChange}
+            required
+          />
 
           <button type="submit" className="login-btn">
             Login as {role}
           </button>
         </form>
 
-        {/* Existing note */}
-        <p className="login-note">
-          {role === "admin"
-            ? "Only authorized admins can access the admin panel."
-            : "Welcome back! Login to explore recipes and blogs."}
-        </p>
-
-        {/* ✅ STEP 4: Register link (USER ONLY) */}
         {role === "user" && (
           <p className="login-note">
             Don’t have an account? <Link to="/register">Register here</Link>
