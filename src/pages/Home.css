@@ -1,9 +1,16 @@
 .home {
   width: 100%;
+  margin-top: 0;
+  padding-top: 0;
 }
 
-/* HERO */
-/* REMOVE GAP ABOVE HERO */
+.home-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* HERO SECTION */
 .hero-section {
   position: relative;
   width: 100%;
@@ -16,10 +23,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block; /* removes small gaps */
+  display: block;
 }
 
-/* PERFECTLY CENTER TEXT */
 .hero-text {
   position: absolute;
   top: 50%;
@@ -49,7 +55,11 @@
   font-size: 16px;
 }
 
-/* Featured Recipes */
+.hero-text button:hover {
+  background-color: #d18c14;
+}
+
+/* FEATURED RECIPES */
 .featured {
   padding: 40px;
   text-align: center;
@@ -69,6 +79,11 @@
   overflow: hidden;
   padding-bottom: 15px;
   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
 }
 
 .recipe-card img {
@@ -91,7 +106,7 @@
   border-radius: 4px;
 }
 
-/* Categories */
+/* CATEGORIES */
 .categories {
   text-align: center;
   padding: 30px 0;
@@ -110,96 +125,4 @@
   background: #074d35;
   color: white;
   font-size: 14px;
-}
-/* Wrapper */
-.home-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* Hero Section remains same */
-
-/* Recipe Section */
-.recipe-section {
-  margin-top: 40px;
-  text-align: center;
-}
-
-.recipe-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  justify-content: center;
-  padding: 20px 0;
-}
-
-/* Recipe Card */
-.recipe-card {
-  background: white;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
-}
-
-.recipe-card:hover {
-  transform: translateY(-5px);
-}
-
-.recipe-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.recipe-card h3 {
-  margin: 10px 0;
-  font-weight: 600;
-}
-
-/* Categories Section */
-.categories-section {
-  margin-top: 50px;
-  text-align: center;
-}
-
-.category-tags {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 20px 0;
-}
-
-.category-tag {
-  background: #004d33;
-  color: white;
-  padding: 7px 14px;
-  border-radius: 20px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.category-tag:hover {
-  opacity: 0.8;
-}
-.home-container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px;
-}
-.hero-section {
-  height: 300px;
-}
-.recipe-card h3 {
-  margin: 10px 0 5px;
-}
-.hero-text button:hover {
-  background-color: #d18c14;
-}
-.home {
-  margin-top: 0;
-  padding-top: 0;
 }
