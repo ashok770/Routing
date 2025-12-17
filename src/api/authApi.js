@@ -4,12 +4,17 @@ const API = axios.create({
   baseURL: "http://localhost:5000/api",
 });
 
-// REGISTER
-export const registerUser = (data) => {
-  return API.post("/auth/register", data);
-};
+// Attach token automatically
+API.interceptors.request.use((req) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    req.headers.Authorization = `Bearer ${token}`;
+  }
+  return req;
+});
 
-// LOGIN
-export const loginUser = (data) => {
-  return API.post("/auth/login", data);
-};
+export const registerUser = (data) => API.post("/auth/register", data);
+export const loginUser = (data) => API.post("/auth/login", data);
+
+// ✅ NEW: Get profile
+export const getUserProfile = () => API.get("/users/profile");
