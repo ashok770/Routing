@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:5000/api",
+  baseURL: process.env.REACT_APP_API_URL + "/api",
 });
 
 // Attach token automatically
@@ -15,6 +15,4 @@ API.interceptors.request.use((req) => {
 
 export const registerUser = (data) => API.post("/auth/register", data);
 export const loginUser = (data) => API.post("/auth/login", data);
-
-// ✅ NEW: Get profile
 export const getUserProfile = () => API.get("/users/profile");
