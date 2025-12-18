@@ -5,7 +5,6 @@ exports.protect = async (req, res, next) => {
   try {
     let token;
 
-    // Check Authorization header
     if (
       req.headers.authorization &&
       req.headers.authorization.startsWith("Bearer")
@@ -14,13 +13,11 @@ exports.protect = async (req, res, next) => {
     }
 
     if (!token) {
-      return res.status(401).json({ message: "Not authorized, token missing" });
+      return res.status(401).json({ message: "Not authorized" });
     }
 
-    // Verify token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    // Get user from token
     req.user = await User.findById(decoded.id).select("-password");
 
     if (!req.user) {
@@ -28,7 +25,17 @@ exports.protect = async (req, res, next) => {
     }
 
     next();
-  } catch (error) {
+  } catch (err) {
     return res.status(401).json({ message: "Invalid token" });
+  }
+};
+
+exports.adminOnly = (req, res, next) => {
+  if (req.user && req.user.role === "admin") {
+    next();
+  } else {
+    return res.status(403).json({
+      message: "Access denied. Admin only.",
+    });
   }
 };

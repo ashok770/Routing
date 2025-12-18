@@ -1,16 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const { protect } = require("../middleware/authMiddleware");
-const adminOnly = require("../middleware/adminMiddleware");
+const { protect, adminOnly } = require("../middleware/authMiddleware");
+const { adminDashboard } = require("../controllers/adminController");
 
-// TEST ADMIN ROUTE
-router.get("/dashboard", protect, adminOnly, (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Welcome Admin Dashboard",
-    admin: req.user,
-  });
-});
+router.get("/dashboard", protect, adminOnly, adminDashboard);
 
 module.exports = router;
