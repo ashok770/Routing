@@ -1,83 +1,47 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Profile.css";
-import avatar from "../assets/images/default-avatar.png";
+import AvatarUpload from "../components/AvatarUpload";
 
 export default function Profile() {
   const [user, setUser] = useState(null);
-  const [name, setName] = useState("");
-  const [editing, setEditing] = useState(false);
-
-  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchProfile = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/api/users/profile", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+      const token = localStorage.getItem("token");
 
-        setUser(res.data.user);
-        setName(res.data.user.name);
-      } catch (error) {
-        console.error("Failed to fetch profile");
-      }
+      const res = await axios.get("http://localhost:5000/api/users/profile", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setUser(res.data.user);
     };
 
     fetchProfile();
-  }, [token]);
+  }, []);
 
-  const handleUpdate = async () => {
-    try {
-      const res = await axios.put(
-        "http://localhost:5000/api/users/profile",
-        { name },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setUser(res.data.user);
-      setEditing(false);
-      alert("Profile updated");
-    } catch (error) {
-      alert("Update failed");
-    }
-  };
-
-  if (!user) return <p>Loading...</p>;
+  if (!user) return <p>Loading profile...</p>;
 
   return (
     <div className="profile-page">
       <div className="profile-card">
-        <div className="profile-header">
-          <img src={avatar} alt="Avatar" className="profile-avatar" />
-          <h2>{user.name}</h2>
-          <span className={`role-badge ${user.role}`}>{user.role}</span>
-        </div>
+        <img
+          src={
+            user.avatar
+              ? `http://localhost:5000${user.avatar}`
+              : "/default-avatar.png"
+          }
+          alt="avatar"
+          className="profile-avatar"
+        />
 
-        <div className="profile-section">
-          <p>
-            <strong>Email:</strong> {user.email}
-          </p>
+        <h2>{user.name}</h2>
+        <p>{user.email}</p>
+        <p>Role: {user.role}</p>
 
-          {editing ? (
-            <>
-              <input
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <button onClick={handleUpdate}>Save</button>
-            </>
-          ) : (
-            <button onClick={() => setEditing(true)}>Edit Profile</button>
-          )}
-        </div>
+        <AvatarUpload setUser={setUser} />
       </div>
     </div>
   );

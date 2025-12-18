@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 
 const connectDB = require("./config/db");
 
@@ -19,6 +20,7 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/users", userRoutes);
 
 app.use("/uploads", express.static("uploads"));
+app.use("/api/admin", adminRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
