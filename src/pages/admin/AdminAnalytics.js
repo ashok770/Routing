@@ -7,48 +7,50 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import axios from "axios";
+import { getAdminStats } from "../../api/adminApi";
 
-export default function AdminAnalytics() {
+const AdminAnalytics = () => {
   const [stats, setStats] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchStats = async () => {
-      const token = localStorage.getItem("token");
-      const res = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/admin/stats`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setStats(res.data.stats);
+      try {
+        const res = await getAdminStats();
+        setStats(res.data.stats);
+      } catch (error) {
+        console.error("Failed to load stats", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchStats();
   }, []);
 
-  if (!stats) return <p>Loading analytics...</p>;
+  if (loading) return <p>Loading analytics...</p>;
+  if (!stats) return <p>No data available</p>;
 
-  const data = [
-    { name: "Total Users", value: stats.totalUsers },
-    { name: "Admins", value: stats.admins },
-    { name: "Users", value: stats.users },
+  const chartData = [
+    { name: "Users", count: stats.users },
+    { name: "Admins", count: stats.admins },
+    { name: "Total", count: stats.totalUsers },
   ];
 
   return (
-    <div style={{ width: "100%", height: 300 }}>
+    <div style={{ padding: "30px" }}>
       <h2>📊 Admin Analytics</h2>
 
-      <ResponsiveContainer>
-        <BarChart data={data}>
+      <ResponsiveContainer width="100%" height={300}>
+        <BarChart data={chartData}>
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
-          <Bar dataKey="value" />
+          <Bar dataKey="count" fill="#0a5c36" />
         </BarChart>
       </ResponsiveContainer>
     </div>
   );
-}
+};
+
+export default AdminAnalytics;

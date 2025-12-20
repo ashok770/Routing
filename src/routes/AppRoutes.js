@@ -51,7 +51,7 @@ const AppRoutes = () => {
       />
 
       <Route
-        path="/admin/analyatics"
+        path="/admin/analytics"
         element={
           <AdminRoute>
             <AdminAnalytics />
