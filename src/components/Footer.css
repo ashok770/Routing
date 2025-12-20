@@ -8,3 +8,11 @@
   width: 100%;
   bottom: 0;
 }
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .footer {
+    padding: 12px 10px;
+    font-size: 12px;
+  }
+}

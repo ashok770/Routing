@@ -77,3 +77,25 @@
 .profile-actions .logout {
   background: #b00020;
 }
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .profile-card {
+    padding: 25px 20px;
+    margin: 10px;
+  }
+
+  .profile-avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .profile-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .profile-actions button {
+    width: 100%;
+  }
+}

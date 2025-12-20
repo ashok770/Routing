@@ -199,6 +199,34 @@
 }
 
 /* small screens adjust */
+@media (max-width: 768px) {
+  .cg-hero {
+    padding: 40px 0;
+  }
+  
+  .cg-hero h1 {
+    font-size: 32px;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+  
+  .cg-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .cg-filters {
+    justify-content: center;
+  }
+  
+  .cg-filter-btn {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+}
+
 @media (max-width: 420px) {
   .cg-hero h1 {
     font-size: 28px;

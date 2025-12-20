@@ -38,3 +38,24 @@
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 35px;
 }
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+  .blog-page {
+    padding: 20px 15px;
+  }
+
+  .blog-title {
+    font-size: 28px;
+  }
+
+  .blog-subtitle {
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
